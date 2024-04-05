@@ -8,13 +8,16 @@
     <h1>Restaurant Menu</h1>
     {% for meal_type in meal_types %}
         <h2>{{ meal_type.1 }}</h2>
+    <!-- Why meal_list??  -->
+    <!-- meal is the table name which defined in models.py -->
+    <!-- _list is where Django the table name  -->
         {% for row in meal_list %}
             {% if row.meal_type == meal_type.0 %}
                 {% if row.status == 0 %}
-                    <h3><del>{{ row.meal_name }}</del></h3>
+                    <a href="{% url 'menu_item' row.pk %}"><h3><del>{{ row.meal_name }}</del></h3></a>
                     <p>{{ row.description }}</p>
                 {% else %}
-                    <h3>{{ row.meal_name }}</h3>
+                    <a href="{% url 'menu_item' row.pk %}"><h3>{{ row.meal_name }}</h3></a>
                     <p>{{ row.description }}</p>
                 {% endif %}
             {% endif %}
