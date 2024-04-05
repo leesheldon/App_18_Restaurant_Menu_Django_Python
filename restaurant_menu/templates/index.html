@@ -6,5 +6,78 @@
 </head>
 <body>
     <h1>Restaurant Menu</h1>
+    {% for meal_type in meal_types %}
+        <h2>{{ meal_type.1 }}</h2>
+        {% for row in meal_list %}
+            {% if row.meal_type == meal_type.0 %}
+                {% if row.status == 0 %}
+                    <h3><del>{{ row.meal_name }}</del></h3>
+                    <p>{{ row.description }}</p>
+                {% else %}
+                    <h3>{{ row.meal_name }}</h3>
+                    <p>{{ row.description }}</p>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
