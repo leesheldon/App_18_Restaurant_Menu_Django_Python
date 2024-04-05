@@ -1,86 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
     <h1>Restaurant Menu</h1>
-    {% for meal_type in meal_types %}
-        <h2>{{ meal_type.1 }}</h2>
-    <!-- Why meal_list??  -->
-    <!-- meal is the table name which defined in models.py -->
-    <!-- _list is where Django the table name  -->
-        {% for row in meal_list %}
-            {% if row.meal_type == meal_type.0 %}
-                {% if row.status == 0 %}
-                    <a href="{% url 'menu_item' row.pk %}"><h3><del>{{ row.meal_name }}</del></h3></a>
-                    <p>{{ row.description }}</p>
-                {% else %}
-                    <a href="{% url 'menu_item' row.pk %}"><h3>{{ row.meal_name }}</h3></a>
-                    <p>{{ row.description }}</p>
+    <ul class="list-group list-group-flush">
+        {% for meal_type in meal_types %}
+            <h2 class="pt-5">{{ meal_type.1 }}</h2>
+        <!-- Why meal_list??  -->
+        <!-- meal (lower case) is the 'Meal(models.Model)' class name which defined in models.py -->
+        <!-- _list is where Django look for this special variable name  -->
+        <!-- This will give us the list of the database records  -->
+            {% for row in meal_list %}
+                {% if row.meal_type == meal_type.0 %}
+                    {% if row.status == 0 %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 pb-0">
+                            <a href="{% url 'menu_item' row.pk meal_type.1 %}"><h3><del>{{ row.meal_name }}</del></h3></a>
+                            <span class="badge bg-primary rounded-pill">{{ row.price }}</span>
+                        </li>
+                        <li class="list-group-item pt-0">
+                            <p>{{ row.description }}</p>
+                        </li>
+                    {% else %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 pb-0">
+                            <a href="{% url 'menu_item' row.pk meal_type.1 %}"><h3>{{ row.meal_name }}</h3></a>
+                            <span class="badge bg-primary rounded-pill">{{ row.price }}</span>
+                        </li>
+                        <li class="list-group-item pt-0">
+                            <p>{{ row.description }}</p>
+                        </li>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
+            {% endfor %}
         {% endfor %}
-    {% endfor %}
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    </ul>
+</div>
+{% endblock content %}

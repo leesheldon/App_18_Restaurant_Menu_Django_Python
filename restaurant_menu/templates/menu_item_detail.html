@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>{{ meal.meal_name }}</h1>
-    <p>{{ meal.description }}</p>
-    <p>Price: {{ meal.price }}</p>
-    <p>Created on: {{ meal.created_on }}</p>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h1 class="pt-5">{{ meal.meal_name }}</h1>
+    <p class="list-group-item pt-0">{{ meal.description }}</p>
+    <div class="badge bg-primary rounded-pill">Price: {{ meal.price }}</div>
+    <div class="list-group-item pt-2">Meal type: {{ selected_meal_type }}</div>
+    <div class="list-group-item pt-2">Created on: {{ meal.created_on }}</div>
+</div>
+{% endblock content %}

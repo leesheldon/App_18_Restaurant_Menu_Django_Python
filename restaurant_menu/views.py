@@ -17,44 +17,8 @@ class MenuItemDetail(generic.DetailView):
     model = Meal
     template_name = "menu_item_detail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["selected_meal_type"] = self.kwargs['meal_type_value']
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return context
